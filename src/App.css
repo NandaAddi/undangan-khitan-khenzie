@@ -1,0 +1,277 @@
+:root {
+  --brown-dark: #3a2518;
+  --brown-medium: #5c3d2e;
+  --brown-light: #8b6914;
+  --cream: #f5f0e8;
+  --cream-dark: #e8dfd0;
+  --gold: #c9a96e;
+  --gold-light: #dfc08a;
+  --text-dark: #3a2518;
+  --text-light: #f5f0e8;
+  --shadow: rgba(58, 37, 24, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Cormorant Garamond', serif;
+  background-color: #3a2518;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app {
+  overflow: hidden;
+}
+
+/* ===== COVER SECTION ===== */
+.cover-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #3a2518;
+}
+
+/* Layer 1: Background */
+.cover-layer-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/bg.webp');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+/* Layer 2: Gunungan */
+.cover-layer-gunungan {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/gunungan.webp');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 2;
+  animation: gununganFloat 6s ease-in-out infinite;
+}
+
+@keyframes gununganFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* Layer 3: Bunga */
+.cover-layer-bunga {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/bunga.webp');
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  z-index: 3;
+  animation: bungaFloat 5s ease-in-out infinite;
+}
+
+@keyframes bungaFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+/* Layer 4: Border */
+.cover-layer-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/BORDER.webp');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Layer 5: Konten1 (cover content image) */
+.cover-layer-konten1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/konten1.webp');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 4;
+}
+
+/* Page section (each 100vh, stacked for scroll) */
+.invite-page {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.multi-page-wrapper {
+  width: 100%;
+}
+
+/* Generic konten layer per page (konten1..konten8) */
+.page-layer-konten {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 4;
+}
+
+.cover-content {
+  position: relative;
+  z-index: 10;
+  width: 90%;
+  max-width: 450px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 20px 20px 55px;
+}
+
+.cover-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.cover-guest-box {
+  background: rgba(92, 61, 46, 0.85);
+  border: 1px solid rgba(139, 105, 20, 0.5);
+  border-radius: 6px;
+  padding: 8px 15px;
+  text-align: center;
+  margin-bottom: 8px;
+  width: 100%;
+  max-width: 250px;
+}
+
+.cover-guest-to {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.7rem;
+  color: var(--cream);
+  opacity: 0.9;
+  margin-bottom: 2px;
+}
+
+.cover-guest-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  margin-bottom: 3px;
+}
+
+.cover-guest-note {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.6rem;
+  color: var(--cream);
+  opacity: 0.8;
+  font-style: italic;
+}
+
+.cover-open-btn {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--cream);
+  background: #5c3d2e;
+  border: 1px solid #8b6914;
+  padding: 8px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.cover-open-btn:hover {
+  background: #6d4a38;
+  transform: translateY(-1px);
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cream-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 3px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+  .cover-content {
+    padding: 20px 15px 55px;
+  }
+
+  .cover-guest-box {
+    padding: 6px 12px;
+    margin-bottom: 6px;
+    max-width: 200px;
+  }
+
+  .cover-guest-to {
+    font-size: 0.6rem;
+  }
+
+  .cover-guest-name {
+    font-size: 0.85rem;
+    margin-bottom: 2px;
+  }
+
+  .cover-guest-note {
+    font-size: 0.5rem;
+  }
+
+  .cover-open-btn {
+    font-size: 0.8rem;
+    padding: 6px 20px;
+  }
+}
