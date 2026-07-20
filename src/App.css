@@ -1,3 +1,51 @@
+@font-face {
+  font-family: 'TT Ramillas';
+  src: url('/fonts/TT Ramillas Trial Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TT Ramillas';
+  src: url('/fonts/TT Ramillas Trial Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TT Ramillas';
+  src: url('/fonts/TT Ramillas Trial Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TT Ramillas';
+  src: url('/fonts/TT Ramillas Trial Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TT Ramillas';
+  src: url('/fonts/TT Ramillas Trial ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TT Ramillas';
+  src: url('/fonts/TT Ramillas Trial Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --brown-dark: #3a2518;
   --brown-medium: #5c3d2e;
@@ -22,18 +70,32 @@ html {
 }
 
 body {
-  font-family: 'Cormorant Garamond', serif;
-  background-color: #3a2518;
+  font-family: 'TT Ramillas', serif;
+  background-color: #1a1410;
   min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: hidden;
+  display: flex;
+  justify-content: center;
 }
 
 #root {
   min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .app {
   overflow: hidden;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  background-color: #e8dfd0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
 }
 
 /* ===== COVER SECTION ===== */
@@ -41,23 +103,24 @@ body {
   position: relative;
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background-color: #3a2518;
+  background-color: #e8dfd0;
 }
 
 /* Layer 1: Background */
 .cover-layer-bg {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
   background-image: url('/bg.webp');
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   z-index: 1;
@@ -66,12 +129,12 @@ body {
 /* Layer 2: Gunungan */
 .cover-layer-gunungan {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
   background-image: url('/gunungan.webp');
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   z-index: 2;
@@ -86,21 +149,48 @@ body {
 /* Layer 3: Bunga */
 .cover-layer-bunga {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
   background-image: url('/bunga.webp');
   background-size: cover;
   background-position: center bottom;
   background-repeat: no-repeat;
   z-index: 3;
-  animation: bungaFloat 5s ease-in-out infinite;
+  animation: bungaFloat 6s ease-in-out infinite;
 }
 
 @keyframes bungaFloat {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-10px) rotate(2deg); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(12px); }
+}
+
+.cover-layer-gunungan.no-float,
+.cover-layer-bunga.no-float {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cover-layer-gunungan,
+  .cover-layer-bunga {
+    animation: none !important;
+  }
+
+  .gapura-img {
+    transition: none !important;
+  }
+
+  .cover-open-btn:hover::before,
+  .cover-open-btn:active::before,
+  .cover-open-btn:focus::before,
+  .cover-open-btn--shine::before {
+    animation: none !important;
+  }
+
+  .gallery-slide {
+    transition: none !important;
+  }
 }
 
 /* Layer 4: Border */
@@ -109,9 +199,9 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: -1px;
   background-image: url('/BORDER.webp');
-  background-size: contain;
+  background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
   z-index: 5;
@@ -127,7 +217,7 @@ body {
   bottom: 0;
   background-image: url('/konten1.webp');
   background-size: contain;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
   z-index: 4;
 }
@@ -137,24 +227,275 @@ body {
   position: relative;
   width: 100%;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
+  margin-bottom: -1px;
 }
 
 .multi-page-wrapper {
   width: 100%;
 }
 
-/* Generic konten layer per page (konten1..konten8) */
+/* Generic konten layer per page (konten2..konten3) */
 .page-layer-konten {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 4;
+}
+
+/* Stack konten page 3 (save-the-date, hari-tanggal, menghitung hari) */
+.invite-page:has(.page-konten3-stack) {
+  height: auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: visible;
+}
+
+.page-konten3-stack {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+}
+
+.page-konten3-img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+}
+
+.page-konten3-img:first-child {
+  width: 100%;
+  max-width: 100%;
+  height: 100dvh;
+  object-fit: cover;
+  margin-top: 0;
+}
+
+.page-konten3-img + .page-konten3-img {
+  margin-top: -5%;
+}
+
+.page-konten3-img:nth-child(2) {
+  margin-top: -20%;
+}
+
+/* ===== GALLERY PAGE (page 4) ===== */
+.invite-page:has(.gallery-stack) {
+  height: auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: visible;
+}
+
+.gallery-stack {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  padding: 0;
+}
+
+.gallery-header {
+  width: 100%;
+  height: 100dvh;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-slider {
+  position: absolute;
+  top: 26%;
+  left: 22%;
+  right: 22%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 2px;
+  z-index: 5;
+  background: rgba(58, 37, 24, 0.3);
+}
+
+.gallery-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-dots {
+  position: absolute;
+  bottom: 6px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  z-index: 6;
+}
+
+.gallery-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(245, 240, 232, 0.5);
+  transition: background 0.3s ease;
+}
+
+.gallery-dot--active {
+  background: var(--gold-light);
+}
+
+/* ===== AMPLOP DIGITAL (page 5) ===== */
+.amplop-wrapper {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
   z-index: 4;
+}
+
+.amplop-full-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.amplop-card-overlay {
+  position: absolute;
+  top: 35%;
+  left: 16%;
+  right: 16%;
+  background: var(--brown-medium);
+  border-radius: 10px;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  z-index: 5;
+}
+
+.amplop-bca-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.amplop-bca-img {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+}
+
+.amplop-account-box {
+  background: #fff;
+  border-radius: 6px;
+  padding: 10px 24px;
+  width: 100%;
+  text-align: center;
+}
+
+.amplop-account-number {
+  font-family: Arial, sans-serif;
+  font-size: clamp(1.2rem, 4.5vw, 1.7rem);
+  font-weight: 900;
+  color: var(--brown-dark);
+  letter-spacing: 2px;
+  -webkit-text-stroke: 0.4px var(--brown-dark);
+}
+
+.amplop-name {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.85rem, 3vw, 1.15rem);
+  font-weight: 500;
+  color: var(--cream);
+  letter-spacing: 2px;
+  margin-top: 4px;
+}
+
+.amplop-copy-btn {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.65rem, 2.2vw, 0.8rem);
+  font-weight: 500;
+  color: var(--cream);
+  background: var(--brown-dark);
+  border: 1px solid var(--gold);
+  padding: 8px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  width: 80%;
+  margin-top: 8px;
+}
+
+.amplop-copy-btn:active {
+  background: var(--brown-medium);
+}
+
+.amplop-maps-link {
+  position: absolute;
+  bottom: 21%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 5;
+}
+
+.amplop-maps-link a {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.7rem, 2.5vw, 0.95rem);
+  font-weight: 500;
+  color: var(--cream);
+  text-decoration: underline;
+  letter-spacing: 1px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ===== PAGE MAPS LINK (generic) ===== */
+.page-maps-link {
+  position: absolute;
+  bottom: 29%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 10;
+}
+
+.page-maps-link a {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.85rem, 3vw, 1.15rem);
+  font-weight: 500;
+  color: var(--cream);
+  text-decoration: underline;
+  letter-spacing: 1px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.invite-page:has(.page-konten3-stack) .page-maps-link {
+  position: absolute;
+  top: 69dvh;
+  left: 0;
+  right: 0;
+  bottom: auto;
+  transform: translateY(-50%);
+  margin: 0;
 }
 
 .cover-content {
@@ -163,11 +504,12 @@ body {
   width: 90%;
   max-width: 450px;
   height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  padding: 20px 20px 55px;
+  padding: 18px 14px 50px;
 }
 
 .cover-bottom {
@@ -178,57 +520,123 @@ body {
 }
 
 .cover-guest-box {
-  background: rgba(92, 61, 46, 0.85);
-  border: 1px solid rgba(139, 105, 20, 0.5);
+  background: #5c3d2e;
+  border: 1px solid #8b6914;
   border-radius: 6px;
-  padding: 8px 15px;
+  padding: 6px 12px;
   text-align: center;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   width: 100%;
-  max-width: 250px;
+  max-width: 200px;
 }
 
 .cover-guest-to {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.7rem;
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.55rem, 2.5vw, 0.75rem);
   color: var(--cream);
-  opacity: 0.9;
   margin-bottom: 2px;
 }
 
 .cover-guest-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--gold-light);
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.85rem, 3.5vw, 1.1rem);
+  font-weight: 500;
+  color: var(--cream);
   margin-bottom: 3px;
 }
 
 .cover-guest-note {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.6rem;
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.6rem, 2vw, 0.7rem);
   color: var(--cream);
-  opacity: 0.8;
   font-style: italic;
 }
 
 .cover-open-btn {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.9rem;
-  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.7rem, 2.6vw, 0.9rem);
+  font-weight: 500;
   color: var(--cream);
   background: #5c3d2e;
   border: 1px solid #8b6914;
-  padding: 8px 25px;
+  padding: 7px 20px;
   border-radius: 6px;
   cursor: pointer;
   letter-spacing: 1px;
   transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cover-open-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  transform: translateX(-150%) skewX(-20deg);
+  pointer-events: none;
 }
 
 .cover-open-btn:hover {
   background: #6d4a38;
   transform: translateY(-1px);
+}
+
+.cover-open-btn:hover::before,
+.cover-open-btn:active::before,
+.cover-open-btn:focus::before,
+.cover-open-btn--shine::before {
+  animation: cover-btn-shine 0.7s ease;
+}
+
+@keyframes cover-btn-shine {
+  to {
+    transform: translateX(250%) skewX(-20deg);
+  }
+}
+
+/* ===== GAPURA OPENING (page 1) ===== */
+.gapura-opening {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.gapura-img {
+  position: absolute;
+  height: 90%;
+  width: auto;
+  max-width: 50%;
+  object-fit: contain;
+  will-change: transform;
+  transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gapura-img-left {
+  left: 0;
+  transform: translateX(0);
+}
+
+.gapura-img-right {
+  right: 0;
+  transform: translateX(0) scaleX(-1);
+}
+
+.gapura-opening--open .gapura-img-left {
+  transform: translateX(-100%);
+}
+
+.gapura-opening--open .gapura-img-right {
+  transform: translateX(100%) scaleX(-1);
 }
 
 /* ===== SCROLLBAR ===== */
@@ -245,33 +653,726 @@ body {
   border-radius: 3px;
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 480px) {
+/* ===== COUNTDOWN TIMER (page 3) ===== */
+.countdown-timer {
+  width: 100%;
+  max-width: 100%;
+  margin-top: -48%;
+  padding: 16px 10px 24px;
+  text-align: center;
+  font-family: 'TT Ramillas', serif;
+  color: var(--cream);
+}
+
+.countdown-title {
+  font-size: clamp(0.7rem, 2.6vw, 0.9rem);
+  font-weight: 500;
+  letter-spacing: 2px;
+  margin: 0 0 8px;
+  color: #472d21;
+  text-transform: uppercase;
+}
+
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 64px);
+  justify-content: center;
+  gap: 6px;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 64px;
+  padding: 3px 4px;
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  background: #472d21;
+}
+
+.countdown-item:last-child {
+  grid-column: 1 / -1;
+  justify-self: center;
+  margin-top: 2px;
+}
+
+.countdown-value {
+  font-size: clamp(1.7rem, 7vw, 2.6rem);
+  font-weight: 700;
+  line-height: 0.9;
+  color: var(--cream);
+}
+
+.countdown-label {
+  margin-top: 4px;
+  font-size: clamp(0.6rem, 2.2vw, 0.9rem);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--cream);
+}
+
+/* ===== RESPONSIVE: Small phones (<=380px) ===== */
+@media (max-width: 380px) {
   .cover-content {
-    padding: 20px 15px 55px;
+    padding: 15px 12px 45px;
   }
 
   .cover-guest-box {
-    padding: 6px 12px;
+    padding: 6px 10px;
     margin-bottom: 6px;
-    max-width: 200px;
-  }
-
-  .cover-guest-to {
-    font-size: 0.6rem;
-  }
-
-  .cover-guest-name {
-    font-size: 0.85rem;
-    margin-bottom: 2px;
-  }
-
-  .cover-guest-note {
-    font-size: 0.5rem;
+    max-width: 220px;
   }
 
   .cover-open-btn {
-    font-size: 0.8rem;
-    padding: 6px 20px;
+    padding: 8px 20px;
+  }
+
+  .countdown-item {
+    padding: 3px 4px;
+  }
+}
+
+/* ===== RESPONSIVE: Landscape phones ===== */
+@media (max-height: 500px) and (orientation: landscape) {
+  .cover-container {
+    min-height: 100vh;
+  }
+
+  .cover-content {
+    height: auto;
+    min-height: 100vh;
+    padding: 15px 20px 30px;
+    justify-content: center;
+  }
+
+  .cover-guest-box {
+    margin-bottom: 10px;
+  }
+
+  .invite-page {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .gapura-img {
+    height: 80%;
+  }
+}
+
+/* ===== CLOSING PAGE (page 8) ===== */
+.closing-wrapper {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closing-full-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* ===== ATTENDANCE FORM (page 6) ===== */
+.invite-page:has(.attendance-stack) {
+  height: auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: visible;
+}
+
+.attendance-stack {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  padding: 24px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+}
+
+.guestbook-stack {
+  max-width: 320px;
+  padding: 24px 14px;
+}
+
+.attendance-title {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(1.3rem, 5vw, 1.8rem);
+  font-weight: 700;
+  color: var(--brown-dark);
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.attendance-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.attendance-field input,
+.attendance-field select,
+.attendance-field textarea {
+  width: 100%;
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.8rem, 3vw, 1rem);
+  color: var(--brown-dark);
+  background: var(--cream);
+  border: 1px solid var(--gold);
+  border-radius: 6px;
+  padding: 10px 12px;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.attendance-field textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+.attendance-field input::placeholder,
+.attendance-field textarea::placeholder {
+  color: rgba(58, 37, 24, 0.5);
+}
+
+.attendance-submit {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.8rem, 3vw, 1rem);
+  font-weight: 500;
+  color: var(--cream);
+  background: var(--brown-dark);
+  border: 1px solid var(--gold);
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  margin-top: 4px;
+}
+
+.attendance-submit:active {
+  background: var(--brown-medium);
+}
+
+.attendance-submit:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.attendance-loadmore {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.75rem, 2.8vw, 0.95rem);
+  font-weight: 500;
+  color: var(--cream);
+  background: var(--brown-dark);
+  border: 1px solid var(--gold);
+  padding: 9px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  margin: 14px auto 0;
+  display: block;
+}
+
+.attendance-loadmore:active {
+  background: var(--brown-medium);
+}
+
+.attendance-loadmore:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.attendance-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.attendance-page-btn {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.75rem, 2.8vw, 0.95rem);
+  font-weight: 500;
+  color: var(--cream);
+  background: var(--brown-dark);
+  border: 1px solid var(--gold);
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.attendance-page-btn.is-active {
+  background: var(--gold);
+  color: var(--brown-dark);
+}
+
+.attendance-page-btn:active {
+  background: var(--brown-medium);
+}
+
+.attendance-page-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.attendance-success {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+  color: var(--brown-dark);
+  text-align: center;
+  margin-top: 10px;
+}
+
+.attendance-error {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+  color: #b23a3a;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.attendance-guestbook-title {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(1.1rem, 4vw, 1.4rem);
+  font-weight: 500;
+  color: var(--brown-dark);
+  margin: 28px 0 12px;
+  text-align: center;
+}
+
+.attendance-guestbook {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.attendance-empty {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.7rem, 2.5vw, 0.85rem);
+  color: var(--brown-dark);
+  opacity: 0.7;
+  text-align: center;
+}
+
+.attendance-wish-column {
+  background: #613c2c;
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  padding: 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 58dvh;
+  overflow-y: auto;
+}
+
+.attendance-wish {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.attendance-wish-name {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.85rem, 3vw, 1rem);
+  font-weight: 500;
+  color: var(--gold-light);
+}
+
+.attendance-wish-meta {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.6rem, 2vw, 0.75rem);
+  color: var(--cream);
+  opacity: 0.8;
+  margin: 2px 0 4px;
+}
+
+.attendance-wish-text {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+  color: var(--cream);
+  line-height: 1.4;
+}
+
+/* ===== DASHBOARD (route /dashboard) — mobile app shell ===== */
+.dash-app {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  height: 100dvh;
+  margin: 0 auto;
+  background: var(--cream-dark);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
+}
+
+.dash-appbar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: var(--brown-dark);
+  border-bottom: 1px solid var(--gold);
+  z-index: 5;
+}
+
+.dash-appbar-title {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(1rem, 4vw, 1.3rem);
+  font-weight: 700;
+  color: var(--cream);
+  letter-spacing: 0.5px;
+}
+
+.dash-screen {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px 14px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.dash-screen--center {
+  align-items: center;
+  justify-content: center;
+}
+
+.dash-screen--center .dash-card {
+  width: 100%;
+  max-width: 320px;
+}
+
+.dash-card {
+  background: #fff;
+  border: 1px solid var(--gold);
+  border-radius: 14px;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 2px 10px rgba(58, 37, 24, 0.12);
+}
+
+.dash-tabbar {
+  flex: 0 0 auto;
+  display: flex;
+  background: var(--brown-dark);
+  border-top: 1px solid var(--gold);
+  z-index: 5;
+}
+
+.dash-tab {
+  flex: 1;
+  min-height: 52px;
+  border: none;
+  background: transparent;
+  color: var(--cream);
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.75rem, 3vw, 0.95rem);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.25s ease, background 0.25s ease;
+}
+
+.dash-tab.is-active {
+  color: var(--brown-dark);
+  background: var(--gold);
+}
+
+.dash-tab:active {
+  background: rgba(223, 192, 138, 0.4);
+}
+
+.dash-tab.is-active:active {
+  background: var(--gold-light);
+}
+
+.dashboard-section-title {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.95rem, 3.5vw, 1.2rem);
+  font-weight: 500;
+  color: var(--brown-dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dashboard-label {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.65rem, 2.2vw, 0.8rem);
+  color: var(--brown-dark);
+  opacity: 0.85;
+}
+
+.dashboard-input,
+.dashboard-textarea {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.75rem, 2.6vw, 0.9rem);
+  color: var(--brown-dark);
+  background: #fff;
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 9px 12px;
+  width: 100%;
+  outline: none;
+}
+
+.dashboard-btn {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.8rem, 2.8vw, 0.95rem);
+  font-weight: 500;
+  color: var(--cream);
+  background: var(--brown-dark);
+  border: 1px solid var(--gold);
+  border-radius: 10px;
+  padding: 12px 16px;
+  width: 100%;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: background 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dashboard-btn:hover {
+  background: var(--brown-medium);
+}
+
+.dashboard-btn--primary {
+  background: var(--gold);
+  color: var(--brown-dark);
+}
+
+.dashboard-btn--primary:hover {
+  background: var(--gold-light);
+}
+
+.dashboard-error {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.7rem, 2.5vw, 0.85rem);
+  color: #b23a3a;
+  text-align: center;
+}
+
+.dashboard-success {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.7rem, 2.5vw, 0.85rem);
+  color: var(--brown-dark);
+  text-align: center;
+}
+
+.dashboard-link-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.dashboard-link {
+  font-family: monospace;
+  font-size: clamp(0.6rem, 2vw, 0.75rem);
+  color: var(--brown-dark);
+  word-break: break-all;
+  flex: 1;
+}
+
+.dashboard-btn--small {
+  padding: 6px 12px;
+  font-size: clamp(0.65rem, 2.2vw, 0.8rem);
+  white-space: nowrap;
+}
+
+.dashboard-live-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3fae5a;
+  margin-left: 8px;
+  vertical-align: middle;
+  animation: dash-live-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes dash-live-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.dashboard-live {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 280px;
+  overflow-y: auto;
+  background: #613c2c;
+  border: 1px solid var(--gold);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.dashboard-live-item {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.dashboard-live-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.dashboard-live-name {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.75rem, 2.6vw, 0.9rem);
+  font-weight: 500;
+  color: var(--gold-light);
+}
+
+.dashboard-live-del {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.6rem, 2vw, 0.75rem);
+  color: #ffd9d9;
+  background: #8a2b2b;
+  border: 1px solid #c05858;
+  border-radius: 6px;
+  padding: 3px 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dashboard-live-del:hover {
+  background: #a33333;
+}
+
+.dashboard-live-meta {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.6rem, 2vw, 0.75rem);
+  color: var(--cream);
+  opacity: 0.8;
+  margin: 2px 0 3px;
+}
+
+.dashboard-live-text {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.7rem, 2.4vw, 0.85rem);
+  color: var(--cream);
+  line-height: 1.4;
+}
+
+.dashboard-file {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.7rem, 2.4vw, 0.85rem);
+  color: var(--brown-dark);
+  background: #fff;
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 8px 10px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.dashboard-recipients {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.dashboard-recipient {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: #613c2c;
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.dashboard-recipient-info {
+  min-width: 0;
+}
+
+.dashboard-recipient-name {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.75rem, 2.6vw, 0.9rem);
+  color: var(--gold-light);
+}
+
+.dashboard-recipient-telp {
+  font-family: 'TT Ramillas', serif;
+  font-size: clamp(0.6rem, 2vw, 0.75rem);
+  color: var(--cream);
+  opacity: 0.8;
+}
+
+/* ===== DASHBOARD: small phones (<=380px) ===== */
+@media (max-width: 380px) {
+  .dashboard-wrap {
+    padding: 0 8px 32px;
+  }
+
+  .dashboard-panel {
+    padding: 16px 12px;
+  }
+
+  .dashboard-nav {
+    gap: 6px;
+  }
+
+  .dashboard-link-box {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dashboard-link-box .dashboard-btn--small {
+    width: 100%;
+  }
+
+  .dashboard-recipient {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dashboard-recipient .dashboard-btn--small {
+    width: 100%;
   }
 }

@@ -1,6 +1,15 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { ReactLenis, useLenis } from 'lenis/react'
+import 'lenis/dist/lenis.css'
 import './App.css'
+import CountdownTimer from './components/CountdownTimer'
+import GallerySlider from './components/GallerySlider'
+import AmplopDigital from './components/AmplopDigital'
+import AttendanceForm from './components/AttendanceForm'
+import Guestbook from './components/Guestbook'
+import ClosingPage from './components/ClosingPage'
+import Dashboard from './components/Dashboard'
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -8,7 +17,25 @@ const fadeInUp = {
 }
 
 function CoverSection({ onOpen }) {
-  const guestName = 'Tamu Undangan'
+  const guestName =
+    new URLSearchParams(window.location.search).get('to') || 'Tamu Undangan'
+  const btnRef = useRef(null)
+
+  const handleOpen = () => {
+    const btn = btnRef.current
+    if (!btn) {
+      onOpen()
+      return
+    }
+    btn.classList.remove('cover-open-btn--shine')
+    void btn.offsetWidth
+    btn.classList.add('cover-open-btn--shine')
+    const go = () => {
+      btn.removeEventListener('animationend', go)
+      onOpen()
+    }
+    btn.addEventListener('animationend', go)
+  }
 
   return (
     <div className="cover-container">
@@ -38,17 +65,17 @@ function CoverSection({ onOpen }) {
             <p className="cover-guest-to">Kepada Yth. Bapak/Ibu/Saudara/i</p>
             <p className="cover-guest-name">{guestName}</p>
             <p className="cover-guest-note">
-              Mohon maaf apabila terdapat kesalahan dalam<br />
-              penulisan nama/gelar.
+              Mohon maaf apabila terdapat kesalahan dalam penulisan nama/gelar.
             </p>
           </motion.div>
 
           <motion.button
+            ref={btnRef}
             className="cover-open-btn"
             variants={fadeInUp}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={onOpen}
+            onClick={handleOpen}
           >
             Buka Undangan
           </motion.button>
@@ -58,19 +85,75 @@ function CoverSection({ onOpen }) {
   )
 }
 
-function PageSection({ index }) {
+function GapuraOpening() {
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setOpen(true), 500)
+    return () => clearTimeout(timer)
+  }, [])
+
+  return (
+    <div className={`gapura-opening ${open ? 'gapura-opening--open' : ''}`}>
+      <img src="/gapura.webp" alt="gapura kiri" className="gapura-img gapura-img-left" />
+      <img src="/gapura.webp" alt="gapura kanan" className="gapura-img gapura-img-right" />
+    </div>
+  )
+}
+
+function PageSection({ index, images, showGapura, gallery, amplop, mapsUrl, form, guestbook, closing }) {
   const konten = `/konten${index}.webp`
+  const animateDecor = !form && !guestbook && !amplop
 
   return (
     <section className="invite-page">
       {/* Reused layers: bg, gunungan, bunga, border */}
       <div className="cover-layer-bg" />
-      <div className="cover-layer-gunungan" />
-      <div className="cover-layer-bunga" />
+      <div className={`cover-layer-gunungan${animateDecor ? '' : ' no-float'}`} />
+      <div className={`cover-layer-bunga${animateDecor ? '' : ' no-float'}`} />
       <div className="cover-layer-border" />
 
-      {/* Konten page (jika ada) */}
-      <div className={`page-layer-konten page-layer-konten-${index}`} style={{ backgroundImage: `url('${konten}')` }} />
+      {/* Attendance form page */}
+      {form ? (
+        <AttendanceForm />
+      ) : guestbook ? (
+        <Guestbook />
+      ) : closing ? (
+        <ClosingPage />
+      ) : amplop ? (
+        <AmplopDigital />
+      ) : gallery ? (
+        <div className="gallery-stack">
+          {/* Header (Our Gallery) - full bleed */}
+          <img src={gallery[0]} alt="our gallery" className="gallery-header" />
+          {/* Auto-sliding photos overlay */}
+          <GallerySlider images={gallery.slice(1)} />
+        </div>
+      ) : images ? (
+        <div className="page-konten3-stack">
+          {images.map((item, i) =>
+            item === 'timer' ? (
+              <CountdownTimer key={i} />
+            ) : (
+              <img key={i} src={item} alt={`konten ${index} ${i + 1}`} className="page-konten3-img" />
+            )
+          )}
+        </div>
+      ) : (
+        <div className={`page-layer-konten page-layer-konten-${index}`} style={{ backgroundImage: `url('${konten}')` }} />
+      )}
+
+      {/* Maps link overlay */}
+      {mapsUrl && (
+        <div className="page-maps-link">
+          <a href={mapsUrl} target="_blank" rel="noopener noreferrer">
+            Lokasi (Google Maps)
+          </a>
+        </div>
+      )}
+
+      {/* Gapura opening overlay */}
+      {showGapura && <GapuraOpening />}
     </section>
   )
 }
@@ -78,10 +161,36 @@ function PageSection({ index }) {
 function MultiPageSection() {
   const pages = [2, 3, 4, 5, 6, 7, 8]
 
+  const konten3Images = [
+    '/konten3/save-the-date.webp',
+    'timer'
+  ]
+
+  const galleryImages = [
+    '/konten4/our gallery.webp',
+    '/konten4/gambar1.webp',
+    '/konten4/gambar2.webp',
+    '/konten4/gambar3.webp',
+    '/konten4/gambar4.webp',
+    '/konten4/gambar5.webp',
+    '/konten4/gambar6.webp'
+  ]
+
   return (
     <div className="multi-page-wrapper">
       {pages.map((n) => (
-        <PageSection key={n} index={n} />
+        <PageSection
+          key={n}
+          index={n}
+          images={n === 3 ? konten3Images : undefined}
+          gallery={n === 4 ? galleryImages : undefined}
+          amplop={n === 5}
+          form={n === 6}
+          guestbook={n === 7}
+          closing={n === 8}
+          mapsUrl={n === 3 ? 'https://maps.app.goo.gl/7paDEStubjaWSGrLA' : undefined}
+          showGapura={n === 2}
+        />
       ))}
     </div>
   )
@@ -89,40 +198,50 @@ function MultiPageSection() {
 
 function App() {
   const [page, setPage] = useState('cover') // 'cover' | 'content'
-  const audioRef = useRef(null)
+  const lenis = useLenis()
+
+  if (typeof window !== 'undefined' && window.location.pathname.startsWith('/dashboard')) {
+    return <Dashboard />
+  }
 
   const goToContent = () => {
     setPage('content')
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true })
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
   }
 
   return (
-    <div className="app">
-      <AnimatePresence mode="wait">
-        {page === 'cover' && (
-          <motion.div
-            key="cover"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+    <ReactLenis root options={{ lerp: 0.1, smoothWheel: true }}>
+      <div className="app">
+        <AnimatePresence mode="wait">
+          {page === 'cover' && (
+            <motion.div
+              key="cover"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
             exit={{ y: '-100%', opacity: 0 }}
-            transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-          >
-            <CoverSection onOpen={goToContent} />
-          </motion.div>
-        )}
+            transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+            >
+              <CoverSection onOpen={goToContent} />
+            </motion.div>
+          )}
 
-        {page === 'content' && (
-          <motion.div
-            key="content"
-            initial={{ y: '100%', opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-          >
-            <MultiPageSection />
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+          {page === 'content' && (
+            <motion.div
+              key="content"
+              initial={{ y: '100%', opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+            >
+              <MultiPageSection />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </ReactLenis>
   )
 }
 

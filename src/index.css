@@ -7,14 +7,3 @@
 html {
   scroll-behavior: smooth;
 }
-
-body {
-  font-family: 'Cormorant Garamond', serif;
-  background-color: #3a2518;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-#root {
-  min-height: 100vh;
-}

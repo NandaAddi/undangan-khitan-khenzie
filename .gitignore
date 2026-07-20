@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+.env
+.env.local
 
 # Editor directories and files
 .vscode/*
@@ -22,3 +24,13 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Source fonts (already copied to public/fonts)
+tt_ramillas/
+
+# Unused sample / assets
+public/audio.mp3
+public/contoh-page3.webp
+
+# Vercel
+.vercel
