@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { supabase } from '../lib/supabase'
 
+const WA_NUMBER = '6283807000708'
+
 export default function AttendanceForm() {
   const [nama, setNama] = useState('')
   const [kehadiran, setKehadiran] = useState('Hadir')
@@ -14,14 +16,17 @@ export default function AttendanceForm() {
     e.preventDefault()
     if (!nama.trim() || !ucapan.trim()) return
 
+    const namaTrim = nama.trim()
+    const ucapanTrim = ucapan.trim()
+
     setErrorMsg('')
     setSubmitting(true)
     const { error } = await supabase.from('khitan').insert([
       {
-        nama: nama.trim(),
+        nama: namaTrim,
         kehadiran,
         jumlah_tamu: jumlah ? parseInt(jumlah, 10) : null,
-        ucapan: ucapan.trim()
+        ucapan: ucapanTrim
       }
     ])
     setSubmitting(false)
@@ -33,6 +38,12 @@ export default function AttendanceForm() {
       setUcapan('')
       setSuccess(true)
       setTimeout(() => setSuccess(false), 3000)
+
+      const waMessage =
+        `Assalamu'alaikum, saya *${namaTrim}* mengkonfirmasi kehadiran: *${kehadiran}*` +
+        (jumlah ? ` (${jumlah} tamu)` : '') +
+        `.\n\nUcapan: ${ucapanTrim}`
+      window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}`, '_blank')
     } else {
       setErrorMsg('Gagal mengirim. Periksa koneksi Anda.')
     }
