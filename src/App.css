@@ -841,6 +841,18 @@ body {
   }
 }
 
+/* ===== RESPONSIVE: Portrait phones (9:16 fullscreen) — raise cover content ===== */
+@media (orientation: portrait) {
+  .cover-content {
+    justify-content: center;
+    padding-bottom: 0;
+  }
+
+  .cover-guest-box {
+    margin-bottom: 10px;
+  }
+}
+
 /* ===== CLOSING PAGE (page 8) ===== */
 .closing-wrapper {
   position: relative;
