@@ -1,7 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ReactLenis, useLenis } from 'lenis/react'
-import 'lenis/dist/lenis.css'
 import './App.css'
 import CountdownTimer from './components/CountdownTimer'
 import GallerySlider from './components/GallerySlider'
@@ -190,7 +188,6 @@ function MultiPageSection() {
 
 function App() {
   const [page, setPage] = useState('cover') // 'cover' | 'content'
-  const lenis = useLenis()
 
   if (typeof window !== 'undefined' && window.location.pathname.startsWith('/dashboard')) {
     return <Dashboard />
@@ -198,42 +195,36 @@ function App() {
 
   const goToContent = () => {
     setPage('content')
-    if (lenis) {
-      lenis.scrollTo(0, { immediate: true })
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
+    window.scrollTo({ top: 0, behavior: 'auto' })
   }
 
   return (
-    <ReactLenis root options={{ lerp: 0.1, smoothWheel: true }}>
-      <div className="app">
-        <AnimatePresence mode="wait">
-          {page === 'cover' && (
-            <motion.div
-              key="cover"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-            exit={{ y: '-100%', opacity: 0 }}
-            transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-            >
-              <CoverSection onOpen={goToContent} />
-            </motion.div>
-          )}
+    <div className="app">
+      <AnimatePresence mode="wait">
+        {page === 'cover' && (
+          <motion.div
+            key="cover"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+          exit={{ y: '-100%', opacity: 0 }}
+          transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+          >
+            <CoverSection onOpen={goToContent} />
+          </motion.div>
+        )}
 
-          {page === 'content' && (
-            <motion.div
-              key="content"
-              initial={{ y: '100%', opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-            >
-              <MultiPageSection />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </ReactLenis>
+        {page === 'content' && (
+          <motion.div
+            key="content"
+            initial={{ y: '100%', opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+          >
+            <MultiPageSection />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   )
 }
 
