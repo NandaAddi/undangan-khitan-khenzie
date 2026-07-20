@@ -422,9 +422,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 20px;
-  padding: 0 10%;
+  padding: 32% 10% 0;
   pointer-events: none;
 }
 
