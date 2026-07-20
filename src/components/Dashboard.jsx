@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 
 const DASH_PASSWORD = import.meta.env.VITE_DASHBOARD_PASSWORD || 'masuk123'
@@ -29,32 +29,6 @@ function buildWaLink(name) {
   return `${base}/?to=${encodeURIComponent(name)}`
 }
 
-function buildWaUrl(name, telp) {
-  const link = buildWaLink(name)
-  const msg = TEMPLATE.replace('[Masukkan Link Undangan]', link)
-  const number = telp.replace(/[^0-9]/g, '')
-  return `https://wa.me/${number}?text=${encodeURIComponent(msg)}`
-}
-
-function parseCsv(text) {
-  const rows = []
-  const invalid = []
-  const lines = text.split(/\r?\n/).map((l) => l.trim()).filter(Boolean)
-  let start = 0
-  if (lines.length && /nama|telp|name|phone/i.test(lines[0])) start = 1
-  for (let i = start; i < lines.length; i++) {
-    const cols = lines[i].split(',').map((c) => c.trim().replace(/^"|"$/g, ''))
-    const nama = cols[0] || ''
-    const telp = cols[1] || ''
-    if (!nama || !telp) {
-      invalid.push(lines[i])
-      continue
-    }
-    rows.push({ nama, telp })
-  }
-  return { rows, invalid }
-}
-
 export default function Dashboard() {
   const [unlocked, setUnlocked] = useState(
     sessionStorage.getItem('dash_unlocked') === '1'
@@ -70,11 +44,7 @@ export default function Dashboard() {
   const [liveTotal, setLiveTotal] = useState(0)
   const [liveError, setLiveError] = useState(false)
 
-  const [recipients, setRecipients] = useState([])
-  const [csvInvalid, setCsvInvalid] = useState([])
-  const [csvMsg, setCsvMsg] = useState('')
   const [tab, setTab] = useState('link')
-  const fileRef = useRef(null)
 
   const generateLink = () => {
     const name = guestName.trim()
@@ -99,33 +69,12 @@ export default function Dashboard() {
     window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank')
   }
 
-  const shareRecipient = (r) => {
-    window.open(buildWaUrl(r.nama, r.telp), '_blank')
-  }
-
   const deleteWish = async (id) => {
     const { error } = await supabase.from('khitan').delete().eq('id', id)
     if (!error) {
       setLive((prev) => prev.filter((w) => w.id !== id))
       setLiveTotal((t) => Math.max(0, t - 1))
     }
-  }
-
-  const handleCsv = (e) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-    const reader = new FileReader()
-    reader.onload = () => {
-      const { rows, invalid } = parseCsv(String(reader.result))
-      setRecipients(rows)
-      setCsvInvalid(invalid)
-      setCsvMsg(
-        `${rows.length} penerima dimuat` +
-          (invalid.length ? `, ${invalid.length} baris diabaikan` : '')
-      )
-    }
-    reader.readAsText(file)
-    e.target.value = ''
   }
 
   // Live guestbook: realtime subscription + polling safety net
@@ -264,48 +213,6 @@ export default function Dashboard() {
       )
     }
 
-    if (tab === 'bulk') {
-      return (
-        <div className="dash-screen">
-          <div className="dash-card">
-            <h2 className="dashboard-section-title">Bulk WhatsApp</h2>
-            <label className="dashboard-label">Upload CSV (format: nama, telp)</label>
-            <input
-              ref={fileRef}
-              type="file"
-              accept=".csv,text/csv"
-              className="dashboard-file"
-              onChange={handleCsv}
-            />
-            {csvMsg && <p className="dashboard-success">{csvMsg}</p>}
-            {recipients.length > 0 && (
-              <div className="dashboard-recipients">
-                {recipients.map((r, i) => (
-                  <div className="dashboard-recipient" key={i}>
-                    <div className="dashboard-recipient-info">
-                      <p className="dashboard-recipient-name">{r.nama}</p>
-                      <p className="dashboard-recipient-telp">{r.telp}</p>
-                    </div>
-                    <button
-                      className="dashboard-btn dashboard-btn--small"
-                      onClick={() => shareRecipient(r)}
-                    >
-                      Share
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
-            {csvInvalid.length > 0 && (
-              <p className="dashboard-error">
-                {csvInvalid.length} baris diabaikan (kurang nama/telp).
-              </p>
-            )}
-          </div>
-        </div>
-      )
-    }
-
     return (
       <div className="dash-screen">
         <div className="dash-card">
@@ -345,8 +252,7 @@ export default function Dashboard() {
 
   const tabs = [
     { id: 'link', label: 'Link' },
-    { id: 'live', label: 'Buku Tamu' },
-    { id: 'bulk', label: 'Bulk WA' }
+    { id: 'live', label: 'Buku Tamu' }
   ]
 
   return (
