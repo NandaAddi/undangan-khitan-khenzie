@@ -856,6 +856,13 @@ body {
   .countdown-timer {
     margin-top: -58%;
   }
+
+  .amplop-maps-link {
+    bottom: 27%;
+    left: auto;
+    right: 12%;
+    text-align: right;
+  }
 }
 
 /* ===== RESPONSIVE: Landscape phones ===== */
