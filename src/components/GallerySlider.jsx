@@ -5,6 +5,7 @@ const SLIDE_INTERVAL = 3000
 
 export default function GallerySlider({ images }) {
   const [index, setIndex] = useState(0)
+  const [preview, setPreview] = useState(false)
 
   useEffect(() => {
     if (!images || images.length <= 1) return
@@ -28,6 +29,8 @@ export default function GallerySlider({ images }) {
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: '-100%', opacity: 0 }}
           transition={{ duration: 0.6, ease: 'easeInOut' }}
+          onClick={() => setPreview(true)}
+          style={{ cursor: 'pointer' }}
         />
       </AnimatePresence>
 
@@ -39,6 +42,26 @@ export default function GallerySlider({ images }) {
           />
         ))}
       </div>
+
+      <AnimatePresence>
+        {preview && (
+          <motion.div
+            className="gallery-lightbox"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={() => setPreview(false)}
+          >
+            <img
+              src={images[index]}
+              alt={`gallery ${index + 1}`}
+              className="gallery-lightbox-img"
+            />
+            <span className="gallery-lightbox-hint">Ketuk untuk menutup</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
