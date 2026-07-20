@@ -491,9 +491,9 @@ body {
 .amplop-maps-link {
   position: absolute;
   bottom: 25%;
-  left: auto;
-  right: 10%;
-  text-align: right;
+  left: 0;
+  right: 0;
+  text-align: center;
   z-index: 5;
 }
 
@@ -859,9 +859,9 @@ body {
 
   .amplop-maps-link {
     bottom: 28%;
-    left: auto;
-    right: 10%;
-    text-align: right;
+    left: 0;
+    right: 0;
+    text-align: center;
   }
 }
 
