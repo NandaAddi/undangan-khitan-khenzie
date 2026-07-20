@@ -66,7 +66,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -75,16 +75,16 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   overflow-x: hidden;
-  display: flex;
-  justify-content: center;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  overscroll-behavior-y: contain;
 }
 
 #root {
   min-height: 100vh;
   min-height: 100dvh;
   width: 100%;
-  display: flex;
-  justify-content: center;
 }
 
 .app {
@@ -125,6 +125,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   z-index: 1;
+  pointer-events: none;
 }
 
 /* Layer 2: Gunungan */
@@ -140,6 +141,7 @@ body {
   background-repeat: no-repeat;
   z-index: 2;
   animation: gununganFloat 6s ease-in-out infinite;
+  pointer-events: none;
 }
 
 @keyframes gununganFloat {
@@ -160,6 +162,7 @@ body {
   background-repeat: no-repeat;
   z-index: 3;
   animation: bungaFloat 6s ease-in-out infinite;
+  pointer-events: none;
 }
 
 @keyframes bungaFloat {
@@ -243,6 +246,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   z-index: 4;
+  pointer-events: none;
 }
 
 /* Stack konten page 3 (save-the-date, hari-tanggal, menghitung hari) */
@@ -361,6 +365,7 @@ body {
   right: 0;
   bottom: 0;
   z-index: 4;
+  pointer-events: none;
 }
 
 .amplop-full-img {
