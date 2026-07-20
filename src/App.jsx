@@ -186,6 +186,37 @@ function MultiPageSection() {
   )
 }
 
+function AudioToggle() {
+  const audioRef = useRef(null)
+  const [playing, setPlaying] = useState(false)
+
+  const toggle = () => {
+    const audio = audioRef.current
+    if (!audio) return
+    if (playing) {
+      audio.pause()
+      setPlaying(false)
+    } else {
+      audio.play().then(() => setPlaying(true)).catch(() => {})
+    }
+  }
+
+  return (
+    <>
+      <audio ref={audioRef} src="/audio.mp3" loop preload="auto" />
+      <button
+        type="button"
+        className={`audio-toggle ${playing ? 'is-playing' : ''}`}
+        onClick={toggle}
+        aria-label={playing ? 'Matikan musik' : 'Putar musik'}
+      >
+        <span className="audio-toggle-icon" />
+        <span className="audio-toggle-label">{playing ? 'Musik On' : 'Musik Off'}</span>
+      </button>
+    </>
+  )
+}
+
 function App() {
   const [page, setPage] = useState('cover') // 'cover' | 'content'
 
@@ -200,6 +231,7 @@ function App() {
 
   return (
     <div className="app">
+      <AudioToggle />
       <AnimatePresence mode="wait">
         {page === 'cover' && (
           <motion.div

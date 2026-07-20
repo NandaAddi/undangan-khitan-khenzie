@@ -645,6 +645,58 @@ body {
   transform: translateX(100%) scaleX(-1);
 }
 
+/* ===== AUDIO TOGGLE ===== */
+.audio-toggle {
+  position: fixed;
+  top: calc(12px + env(safe-area-inset-top));
+  right: max(12px, calc((100vw - 480px) / 2 + 12px));
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border: 1px solid var(--gold);
+  border-radius: 20px;
+  background: rgba(58, 37, 24, 0.55);
+  color: var(--cream);
+  font-family: 'TT Ramillas', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  backdrop-filter: blur(4px);
+}
+
+.audio-toggle-icon {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--gold-light);
+  position: relative;
+  flex: none;
+}
+
+.audio-toggle-icon::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--gold-light);
+  transform: translate(-50%, -50%);
+}
+
+.audio-toggle.is-playing .audio-toggle-icon {
+  animation: audioPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes audioPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(223, 192, 138, 0.6); }
+  50% { box-shadow: 0 0 0 5px rgba(223, 192, 138, 0); }
+}
+
 /* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar {
   width: 6px;
