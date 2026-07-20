@@ -44,9 +44,9 @@ export default function GallerySlider({ images }) {
         ))}
       </div>
 
-      <AnimatePresence>
-        {preview &&
-          createPortal(
+      {createPortal(
+        <AnimatePresence>
+          {preview && (
             <motion.div
               className="gallery-lightbox"
               initial={{ opacity: 0 }}
@@ -61,10 +61,11 @@ export default function GallerySlider({ images }) {
                 className="gallery-lightbox-img"
               />
               <span className="gallery-lightbox-hint">Ketuk untuk menutup</span>
-            </motion.div>,
-            document.body
+            </motion.div>
           )}
-      </AnimatePresence>
+        </AnimatePresence>,
+        document.body
+      )}
     </div>
   )
 }
