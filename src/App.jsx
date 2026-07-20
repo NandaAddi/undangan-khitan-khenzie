@@ -216,8 +216,8 @@ function App() {
         {page === 'content' && (
           <motion.div
             key="content"
-            initial={{ y: '100%', opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
           >
             <MultiPageSection />
