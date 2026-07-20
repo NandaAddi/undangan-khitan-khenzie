@@ -1,0 +1,17 @@
+{
+  "name": "Undangan Khitan Kaka' Alkhalifi",
+  "short_name": "Khitan Kaka",
+  "description": "Undangan digital khitanan Muhammad Kaka' Alkhalifi",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1410",
+  "theme_color": "#1a1410",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
