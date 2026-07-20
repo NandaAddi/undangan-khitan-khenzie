@@ -74,7 +74,6 @@ body {
   background-color: #1a1410;
   min-height: 100vh;
   min-height: 100dvh;
-  min-height: 100svh;
   overflow-x: hidden;
   display: flex;
   justify-content: center;
@@ -83,22 +82,21 @@ body {
 #root {
   min-height: 100vh;
   min-height: 100dvh;
-  min-height: 100svh;
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
 .app {
-  overflow: hidden;
+  overflow-x: hidden;
   width: 100%;
   max-width: 480px;
   margin: 0 auto;
   background-color: #e8dfd0;
   min-height: 100vh;
   min-height: 100dvh;
-  min-height: 100svh;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* ===== COVER SECTION ===== */
@@ -107,7 +105,6 @@ body {
   width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
-  min-height: 100svh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -227,7 +224,6 @@ body {
   width: 100%;
   height: 100vh;
   height: 100dvh;
-  height: 100svh;
   overflow: hidden;
   margin-bottom: -1px;
 }
@@ -712,6 +708,29 @@ body {
   color: var(--cream);
 }
 
+/* ===== RESPONSIVE: iPhone-class phones (<=430px, e.g. XR/12/13/14) ===== */
+@media (max-width: 430px) {
+  .cover-content {
+    padding: 15px 14px calc(50px + env(safe-area-inset-bottom));
+  }
+
+  .cover-guest-box {
+    max-width: 260px;
+  }
+
+  .attendance-stack,
+  .guestbook-stack {
+    max-width: 300px;
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-bottom: calc(120px + env(safe-area-inset-bottom));
+  }
+
+  .dash-tabbar {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
 /* ===== RESPONSIVE: Small phones (<=380px) ===== */
 @media (max-width: 380px) {
   .cover-content {
@@ -721,7 +740,7 @@ body {
   .cover-guest-box {
     padding: 6px 10px;
     margin-bottom: 6px;
-    max-width: 220px;
+    max-width: 240px;
   }
 
   .cover-open-btn {
