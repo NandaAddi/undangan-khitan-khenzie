@@ -186,28 +186,14 @@ function MultiPageSection() {
   )
 }
 
-function AudioToggle() {
-  const audioRef = useRef(null)
-  const [playing, setPlaying] = useState(false)
-
-  const toggle = () => {
-    const audio = audioRef.current
-    if (!audio) return
-    if (playing) {
-      audio.pause()
-      setPlaying(false)
-    } else {
-      audio.play().then(() => setPlaying(true)).catch(() => {})
-    }
-  }
-
+function AudioToggle({ audioRef, playing, onToggle }) {
   return (
     <>
       <audio ref={audioRef} src="/audio.mp3" loop preload="auto" />
       <button
         type="button"
         className={`audio-toggle ${playing ? 'is-playing' : ''}`}
-        onClick={toggle}
+        onClick={onToggle}
         aria-label={playing ? 'Matikan musik' : 'Putar musik'}
       >
         <span className="audio-toggle-icon" />
@@ -219,19 +205,39 @@ function AudioToggle() {
 
 function App() {
   const [page, setPage] = useState('cover') // 'cover' | 'content'
+  const audioRef = useRef(null)
+  const [playing, setPlaying] = useState(false)
 
   if (typeof window !== 'undefined' && window.location.pathname.startsWith('/dashboard')) {
     return <Dashboard />
   }
 
+  const startAudio = () => {
+    const audio = audioRef.current
+    if (!audio) return
+    audio.play().then(() => setPlaying(true)).catch(() => {})
+  }
+
+  const toggleAudio = () => {
+    const audio = audioRef.current
+    if (!audio) return
+    if (playing) {
+      audio.pause()
+      setPlaying(false)
+    } else {
+      audio.play().then(() => setPlaying(true)).catch(() => {})
+    }
+  }
+
   const goToContent = () => {
+    startAudio()
     setPage('content')
     window.scrollTo({ top: 0, behavior: 'auto' })
   }
 
   return (
     <div className="app">
-      <AudioToggle />
+      <AudioToggle audioRef={audioRef} playing={playing} onToggle={toggleAudio} />
       <AnimatePresence mode="wait">
         {page === 'cover' && (
           <motion.div
