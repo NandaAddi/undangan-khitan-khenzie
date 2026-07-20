@@ -814,6 +814,13 @@ body {
   }
 }
 
+/* ===== RESPONSIVE: Desktop (wide viewport, centered 480px frame) ===== */
+@media (min-width: 481px) {
+  .cover-content {
+    padding: 18px 14px calc(96px + env(safe-area-inset-bottom));
+  }
+}
+
 /* ===== RESPONSIVE: Landscape phones ===== */
 @media (max-height: 500px) and (orientation: landscape) {
   .cover-container {
@@ -838,18 +845,6 @@ body {
 
   .gapura-img {
     height: 80%;
-  }
-}
-
-/* ===== RESPONSIVE: Portrait phones (9:16 fullscreen) — raise cover content ===== */
-@media (orientation: portrait) {
-  .cover-content {
-    justify-content: center;
-    padding-bottom: 0;
-  }
-
-  .cover-guest-box {
-    margin-bottom: 10px;
   }
 }
 
