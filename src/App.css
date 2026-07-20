@@ -819,6 +819,10 @@ body {
   .cover-content {
     padding: 18px 14px calc(96px + env(safe-area-inset-bottom));
   }
+
+  .countdown-timer {
+    margin-top: -58%;
+  }
 }
 
 /* ===== RESPONSIVE: Landscape phones ===== */
