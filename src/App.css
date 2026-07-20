@@ -368,6 +368,11 @@ body {
   pointer-events: none;
 }
 
+.amplop-wrapper .amplop-card-overlay,
+.amplop-wrapper .amplop-maps-link {
+  pointer-events: auto;
+}
+
 .amplop-full-img {
   width: 100%;
   height: 100%;
