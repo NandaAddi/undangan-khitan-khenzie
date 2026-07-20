@@ -23,18 +23,12 @@ function CoverSection({ onOpen }) {
 
   const handleOpen = () => {
     const btn = btnRef.current
-    if (!btn) {
-      onOpen()
-      return
+    if (btn) {
+      btn.classList.remove('cover-open-btn--shine')
+      void btn.offsetWidth
+      btn.classList.add('cover-open-btn--shine')
     }
-    btn.classList.remove('cover-open-btn--shine')
-    void btn.offsetWidth
-    btn.classList.add('cover-open-btn--shine')
-    const go = () => {
-      btn.removeEventListener('animationend', go)
-      onOpen()
-    }
-    btn.addEventListener('animationend', go)
+    onOpen()
   }
 
   return (
@@ -73,8 +67,6 @@ function CoverSection({ onOpen }) {
             ref={btnRef}
             className="cover-open-btn"
             variants={fadeInUp}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
             onClick={handleOpen}
           >
             Buka Undangan
