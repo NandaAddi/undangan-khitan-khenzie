@@ -490,7 +490,7 @@ body {
 
 .amplop-maps-link {
   position: absolute;
-  bottom: 21%;
+  bottom: calc(21% + env(safe-area-inset-bottom));
   left: 0;
   right: 0;
   text-align: center;
@@ -858,7 +858,7 @@ body {
   }
 
   .amplop-maps-link {
-    bottom: 24%;
+    bottom: calc(24% + env(safe-area-inset-bottom));
     left: 0;
     right: 0;
     text-align: center;
