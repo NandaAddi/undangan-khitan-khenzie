@@ -490,9 +490,9 @@ body {
 
 .amplop-maps-link {
   position: absolute;
-  bottom: 27%;
+  bottom: 25%;
   left: auto;
-  right: 12%;
+  right: 10%;
   text-align: right;
   z-index: 5;
 }
@@ -748,7 +748,7 @@ body {
 .countdown-timer {
   width: 100%;
   max-width: 100%;
-  margin-top: -58%;
+  margin-top: -28dvh;
   padding: 16px 10px 24px;
   text-align: center;
   font-family: 'TT Ramillas', serif;
@@ -809,10 +809,6 @@ body {
     padding: 15px 14px calc(50px + env(safe-area-inset-bottom));
   }
 
-  .countdown-timer {
-    margin-top: -60%;
-  }
-
   .cover-guest-box {
     max-width: 260px;
   }
@@ -858,13 +854,13 @@ body {
   }
 
   .countdown-timer {
-    margin-top: -58%;
+    margin-top: -30dvh;
   }
 
   .amplop-maps-link {
-    bottom: 30%;
+    bottom: 28%;
     left: auto;
-    right: 12%;
+    right: 10%;
     text-align: right;
   }
 }
