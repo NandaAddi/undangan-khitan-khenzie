@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const SLIDE_INTERVAL = 3000
@@ -44,23 +45,25 @@ export default function GallerySlider({ images }) {
       </div>
 
       <AnimatePresence>
-        {preview && (
-          <motion.div
-            className="gallery-lightbox"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            onClick={() => setPreview(false)}
-          >
-            <img
-              src={images[index]}
-              alt={`gallery ${index + 1}`}
-              className="gallery-lightbox-img"
-            />
-            <span className="gallery-lightbox-hint">Ketuk untuk menutup</span>
-          </motion.div>
-        )}
+        {preview &&
+          createPortal(
+            <motion.div
+              className="gallery-lightbox"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={() => setPreview(false)}
+            >
+              <img
+                src={images[index]}
+                alt={`gallery ${index + 1}`}
+                className="gallery-lightbox-img"
+              />
+              <span className="gallery-lightbox-hint">Ketuk untuk menutup</span>
+            </motion.div>,
+            document.body
+          )}
       </AnimatePresence>
     </div>
   )
