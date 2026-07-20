@@ -748,7 +748,7 @@ body {
 .countdown-timer {
   width: 100%;
   max-width: 100%;
-  margin-top: -48%;
+  margin-top: -58%;
   padding: 16px 10px 24px;
   text-align: center;
   font-family: 'TT Ramillas', serif;
@@ -807,6 +807,10 @@ body {
 @media (max-width: 430px) {
   .cover-content {
     padding: 15px 14px calc(50px + env(safe-area-inset-bottom));
+  }
+
+  .countdown-timer {
+    margin-top: -72%;
   }
 
   .cover-guest-box {
