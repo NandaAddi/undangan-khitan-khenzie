@@ -1,7 +1,34 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 export default function AmplopDigital() {
   const [copied, setCopied] = useState(false)
+  const mapsLinkRef = useRef(null)
+
+  useEffect(() => {
+    const el = mapsLinkRef.current
+    if (!el) return
+
+    const updatePosition = () => {
+      const vh = window.visualViewport?.height || window.innerHeight
+      el.style.bottom = `${vh * 0.22}px`
+    }
+
+    updatePosition()
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', updatePosition)
+      window.visualViewport.addEventListener('scroll', updatePosition)
+    }
+    window.addEventListener('resize', updatePosition)
+
+    return () => {
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener('resize', updatePosition)
+        window.visualViewport.removeEventListener('scroll', updatePosition)
+      }
+      window.removeEventListener('resize', updatePosition)
+    }
+  }, [])
 
   const handleCopy = () => {
     navigator.clipboard.writeText('8040179314').then(() => {
@@ -29,9 +56,9 @@ export default function AmplopDigital() {
           {copied ? 'Tersalin!' : 'Salin Nomor Rekening'}
         </button>
       </div>
-      <div className="amplop-maps-link">
+      <div className="amplop-maps-link" ref={mapsLinkRef}>
         <a href="https://maps.app.goo.gl/N7Ct31qXmGHeKG4p6" target="_blank" rel="noopener noreferrer">
-          Lokasi (Google Maps)
+          <img src="/konten4/button-lokasi.webp" alt="Lokasi Google Maps" className="amplop-maps-btn" />
         </a>
       </div>
     </div>

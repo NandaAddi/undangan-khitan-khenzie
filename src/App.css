@@ -490,7 +490,7 @@ body {
 
 .amplop-maps-link {
   position: absolute;
-  bottom: calc(21% + env(safe-area-inset-bottom));
+  bottom: 150px;
   left: 0;
   right: 0;
   text-align: center;
@@ -505,6 +505,17 @@ body {
   text-decoration: underline;
   letter-spacing: 1px;
   -webkit-tap-highlight-color: transparent;
+}
+
+.amplop-maps-btn {
+  width: 180px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.amplop-maps-btn:hover {
+  transform: scale(1.05);
 }
 
 /* ===== PAGE MAPS LINK (generic) ===== */
