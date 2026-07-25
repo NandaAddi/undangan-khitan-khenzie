@@ -60,6 +60,12 @@ export default function AmplopDigital() {
         <a href="https://maps.app.goo.gl/N7Ct31qXmGHeKG4p6" target="_blank" rel="noopener noreferrer">
           <img src="/konten4/button-lokasi.webp" alt="Lokasi Google Maps" className="amplop-maps-btn" />
         </a>
+        <p className="amplop-maps-address">
+          Jl. Muara Angke PHPT Pengasinan<br />
+          Blok K no.2 Rt.009 Rw.011<br />
+          Kel. Pluit Kec. Penjaringan<br />
+          Jakarta Utara 14450
+        </p>
       </div>
     </div>
   )
