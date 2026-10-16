@@ -7,16 +7,19 @@ const TEMPLATE = `Assalamualaikum Warahmatullahi Wabarakatuh.
 
 Yth. Bapak/Ibu/Saudara/i
 
-Dengan memohon rahmat dan ridho Allah SWT, serta tanpa mengurangi rasa hormat, melalui pesan ini kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara Khitanan putra kami:
+Dengan memohon rahmat dan ridho Allah SWT, serta tanpa mengurangi rasa hormat, melalui pesan ini kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara Khitanan dan Rasulan putra putri kami:
 
-Muhammad Kaka' Alkhalifi
-Putra dari Bapak Zainal Abidin (Zainal) dan Ibu Pitriyanti (Pipit)
+* Kenzie aslam kayana kasnur
+Putra dari Bapak IPDA ADITYA, S.H. dan Ibu BRIPKA TRESIA MORIS, S.H.
+
+* Puja faiha kasnur
+Putra dari Bapak IPDA ADITYA, S.H. dan Ibu BRIPKA TRESIA MORIS, S.H.
 
 Berikut link undangan kami. Untuk informasi lengkap mengenai waktu, lokasi, dan rangkaian acara, silakan kunjungi:
 
 [Masukkan Link Undangan]
 
-Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir serta memberikan doa agar ananda Muhammad Kaka' Alkhalifi senantiasa menjadi anak yang saleh, berbakti kepada orang tua, dan bermanfaat bagi agama, bangsa, dan negara.
+Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir serta memberikan doa agar putra putri kami * Kenzie aslam kayana kasnur dan * Puja faiha kasnur senantiasa menjadi anak yang saleh-salihah, berbakti kepada orang tua, dan bermanfaat bagi agama, bangsa, dan negara.
 
 Mohon maaf apabila undangan ini hanya kami sampaikan melalui pesan WhatsApp.
 
@@ -39,6 +42,7 @@ export default function Dashboard() {
   const [guestName, setGuestName] = useState('')
   const [generatedLink, setGeneratedLink] = useState('')
   const [copied, setCopied] = useState(false)
+  const [copiedMsg, setCopiedMsg] = useState(false)
 
   const [live, setLive] = useState([])
   const [liveTotal, setLiveTotal] = useState(0)
@@ -63,9 +67,24 @@ export default function Dashboard() {
     }
   }
 
+  const getFullMessage = () => {
+    return TEMPLATE.replace('[Masukkan Link Undangan]', generatedLink)
+  }
+
+  const copyFullMessage = async () => {
+    if (!generatedLink) return
+    try {
+      await navigator.clipboard.writeText(getFullMessage())
+      setCopiedMsg(true)
+      setTimeout(() => setCopiedMsg(false), 2000)
+    } catch {
+      setCopiedMsg(false)
+    }
+  }
+
   const shareWA = () => {
     if (!generatedLink) return
-    const msg = TEMPLATE.replace('[Masukkan Link Undangan]', generatedLink)
+    const msg = getFullMessage()
     window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank')
   }
 
@@ -237,15 +256,24 @@ export default function Dashboard() {
             </div>
           )}
           {generatedLink && (
-            <button
-              className="dashboard-btn dashboard-btn--primary"
-              onClick={shareWA}
-            >
-              Bagikan ke WhatsApp
-            </button>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '8px' }}>
+              <button
+                className="dashboard-btn dashboard-btn--primary"
+                onClick={shareWA}
+              >
+                Bagikan ke WhatsApp
+              </button>
+              <button
+                className="dashboard-btn"
+                onClick={copyFullMessage}
+              >
+                Salin Pesan WA Lengkap
+              </button>
+            </div>
           )}
         </div>
-        {copied && <p className="dashboard-success">Tersalin.</p>}
+        {copied && <p className="dashboard-success">Link berhasil disalin ke clipboard.</p>}
+        {copiedMsg && <p className="dashboard-success">Format pesan WhatsApp berhasil disalin ke clipboard.</p>}
       </div>
     )
   }
