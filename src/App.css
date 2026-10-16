@@ -219,7 +219,6 @@ body {
   pointer-events: none;
 }
 
-/* Layer 5: Konten1 (cover content image) */
 .cover-layer-konten1 {
   position: absolute;
   top: 0;
@@ -231,6 +230,20 @@ body {
   background-position: center top;
   background-repeat: no-repeat;
   z-index: 4;
+}
+
+@media (max-height: 750px) {
+  .cover-layer-konten1 {
+    background-size: 94% auto;
+    background-position: center 10px;
+  }
+}
+
+@media (max-height: 660px) {
+  .cover-layer-konten1 {
+    background-size: 90% auto;
+    background-position: center 8px;
+  }
 }
 
 /* Page section (each 100vh, stacked for scroll) */
@@ -705,6 +718,64 @@ body {
 @keyframes cover-btn-shine {
   to {
     transform: translateX(250%) skewX(-20deg);
+  }
+}
+
+@media (max-height: 750px) {
+  .cover-content {
+    padding-bottom: 22px;
+  }
+  .cover-guest-box {
+    margin-bottom: 6px;
+    max-width: 260px;
+  }
+  .cover-guest-to {
+    font-size: 0.65rem;
+    margin-bottom: 2px;
+  }
+  .cover-guest-name {
+    font-size: 1.15rem;
+    margin-bottom: 2px;
+    line-height: 1.15;
+  }
+  .cover-guest-note {
+    font-size: 0.52rem;
+    line-height: 1.25;
+    max-width: 230px;
+  }
+  .cover-open-btn {
+    padding: 7px 18px;
+    font-size: 0.82rem;
+    max-width: 185px;
+  }
+}
+
+@media (max-height: 660px) {
+  .cover-content {
+    padding-bottom: 16px;
+  }
+  .cover-guest-box {
+    margin-bottom: 4px;
+    max-width: 230px;
+  }
+  .cover-guest-to {
+    font-size: 0.6rem;
+    margin-bottom: 1px;
+  }
+  .cover-guest-name {
+    font-size: 1.05rem;
+    margin-bottom: 2px;
+    line-height: 1.1;
+  }
+  .cover-guest-note {
+    font-size: 0.48rem;
+    line-height: 1.2;
+    max-width: 210px;
+  }
+  .cover-open-btn {
+    padding: 6px 16px;
+    font-size: 0.78rem;
+    max-width: 165px;
   }
 }
 
