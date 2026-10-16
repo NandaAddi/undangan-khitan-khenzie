@@ -57,7 +57,7 @@ export default function AmplopDigital() {
         </button>
       </div>
       <div className="amplop-maps-link" ref={mapsLinkRef}>
-        <a href="https://maps.app.goo.gl/N7Ct31qXmGHeKG4p6" target="_blank" rel="noopener noreferrer">
+        <a href="https://maps.app.goo.gl/wckaKPvN7CeQKi6s7?g_st=iw" target="_blank" rel="noopener noreferrer">
           <img src="/konten4/button-lokasi.webp" alt="Lokasi Google Maps" className="amplop-maps-btn" />
         </a>
       </div>

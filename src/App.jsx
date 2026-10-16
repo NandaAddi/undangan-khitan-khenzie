@@ -93,14 +93,13 @@ function GapuraOpening() {
 
 function PageSection({ index, images, showGapura, gallery, amplop, mapsUrl, form, guestbook, closing }) {
   const konten = `/konten${index}.webp`
-  const animateDecor = !form && !guestbook && !amplop
 
   return (
     <section className="invite-page">
       {/* Reused layers: bg, gunungan, bunga, border */}
       <div className="cover-layer-bg" />
-      <div className={`cover-layer-gunungan${animateDecor ? '' : ' no-float'}`} />
-      <div className={`cover-layer-bunga${animateDecor ? '' : ' no-float'}`} />
+      <div className="cover-layer-gunungan" />
+      <div className="cover-layer-bunga" />
       <div className="cover-layer-border" />
 
       {/* Attendance form page */}
@@ -178,7 +177,7 @@ function MultiPageSection() {
           form={n === 6}
           guestbook={n === 7}
           closing={n === 8}
-          mapsUrl={n === 3 ? 'https://maps.app.goo.gl/7paDEStubjaWSGrLA' : undefined}
+          mapsUrl={n === 3 ? 'https://maps.app.goo.gl/wckaKPvN7CeQKi6s7?g_st=iw' : undefined}
           showGapura={n === 2}
         />
       ))}
@@ -237,7 +236,7 @@ function App() {
 
   return (
     <div className="app">
-      <h1 className="sr-only">Undangan Khitan &amp; Rasulan Kenzie &amp; Puja</h1>
+      <h1 className="sr-only">Undangan Khitan Kenzie dan Rasulan Puja</h1>
       <AudioToggle audioRef={audioRef} playing={playing} onToggle={toggleAudio} />
       <AnimatePresence mode="wait">
         {page === 'cover' && (

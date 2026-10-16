@@ -1114,25 +1114,31 @@ body {
 .attendance-page-btn {
   font-family: 'TT Ramillas', serif;
   font-size: clamp(0.75rem, 2.8vw, 0.95rem);
-  font-weight: 500;
-  color: var(--cream);
-  background: var(--brown-dark);
-  border: 1px solid var(--gold);
-  width: 34px;
-  height: 34px;
-  border-radius: 6px;
+  font-weight: 600;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   -webkit-tap-highlight-color: transparent;
 }
 
 .attendance-page-btn.is-active {
   background: #dfa64f;
   color: #0b1736;
+  border-color: #dfa64f;
+  box-shadow: 0 4px 16px rgba(223, 166, 79, 0.4);
 }
 
-.attendance-page-btn:active {
-  background: var(--brown-medium);
+.attendance-page-btn:hover:not(.is-active):not(:disabled) {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .attendance-page-btn:disabled {
@@ -1174,51 +1180,87 @@ body {
 
 .attendance-empty {
   font-family: 'TT Ramillas', serif;
-  font-size: clamp(0.7rem, 2.5vw, 0.85rem);
-  color: var(--brown-dark);
-  opacity: 0.7;
+  font-size: clamp(0.85rem, 3vw, 1rem);
+  color: #ffffff;
+  opacity: 0.95;
   text-align: center;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  border-radius: 14px;
+  padding: 32px 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.2);
 }
 
 .attendance-wish-column {
-  background: #613c2c;
-  border: 1px solid var(--gold);
-  border-radius: 12px;
-  padding: 14px 14px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  border-radius: 14px;
+  padding: 16px 14px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   height: 58dvh;
   overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.attendance-wish-column::-webkit-scrollbar {
+  width: 5px;
+}
+
+.attendance-wish-column::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.attendance-wish-column::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+}
+
+.attendance-wish-column::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.45);
 }
 
 .attendance-wish {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(212, 175, 55, 0.4);
-  border-radius: 8px;
-  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 10px;
+  padding: 12px 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.attendance-wish:hover {
+  border-color: rgba(255, 255, 255, 0.45);
 }
 
 .attendance-wish-name {
   font-family: 'TT Ramillas', serif;
-  font-size: clamp(0.85rem, 3vw, 1rem);
-  font-weight: 500;
-  color: var(--gold-light);
+  font-size: clamp(0.9rem, 3.2vw, 1.05rem);
+  font-weight: 700;
+  color: #dfa64f;
+  letter-spacing: 0.5px;
 }
 
 .attendance-wish-meta {
   font-family: 'TT Ramillas', serif;
-  font-size: clamp(0.6rem, 2vw, 0.75rem);
-  color: var(--cream);
-  opacity: 0.8;
-  margin: 2px 0 4px;
+  font-size: clamp(0.65rem, 2.2vw, 0.78rem);
+  color: rgba(255, 255, 255, 0.75);
+  margin: 3px 0 6px;
 }
 
 .attendance-wish-text {
   font-family: 'TT Ramillas', serif;
-  font-size: clamp(0.7rem, 2.5vw, 0.9rem);
-  color: var(--cream);
-  line-height: 1.4;
+  font-size: clamp(0.75rem, 2.8vw, 0.92rem);
+  color: #ffffff;
+  line-height: 1.5;
+  word-break: break-word;
 }
 
 /* ===== DASHBOARD (route /dashboard) — mobile app shell ===== */
