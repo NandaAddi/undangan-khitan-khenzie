@@ -219,6 +219,7 @@ body {
   pointer-events: none;
 }
 
+/* Layer 5: Konten1 (cover content image) */
 .cover-layer-konten1 {
   position: absolute;
   top: 0;
@@ -230,20 +231,6 @@ body {
   background-position: center top;
   background-repeat: no-repeat;
   z-index: 4;
-}
-
-@media (max-height: 750px) {
-  .cover-layer-konten1 {
-    background-size: 94% auto;
-    background-position: center 10px;
-  }
-}
-
-@media (max-height: 660px) {
-  .cover-layer-konten1 {
-    background-size: 90% auto;
-    background-position: center 8px;
-  }
 }
 
 /* Page section (each 100vh, stacked for scroll) */
@@ -603,7 +590,7 @@ body {
 .cover-content {
   position: relative;
   z-index: 10;
-  width: 100%;
+  width: 90%;
   max-width: 450px;
   height: 100vh;
   height: 100dvh;
@@ -611,7 +598,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  padding: 10px 16px clamp(28px, 4.5vh, 42px);
+  padding: 18px 14px 50px;
 }
 
 .cover-bottom {
@@ -622,72 +609,61 @@ body {
 }
 
 .cover-guest-box {
-  background: transparent;
-  border: none;
-  padding: 0;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  border-radius: 12px;
+  padding: 10px 14px;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   width: 100%;
-  max-width: 280px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  max-width: 230px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.2);
 }
 
 .cover-guest-to {
   font-family: 'TT Ramillas', serif;
-  font-size: clamp(0.7rem, 2.4vw, 0.85rem);
-  font-weight: 500;
-  color: #ffffff;
+  font-size: clamp(0.6rem, 2.6vw, 0.78rem);
+  color: rgba(255, 255, 255, 0.85);
   margin-bottom: 3px;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.65);
   letter-spacing: 0.3px;
 }
 
 .cover-guest-name {
   font-family: 'TT Ramillas', serif;
-  font-size: clamp(1.2rem, 4.2vw, 1.55rem);
-  font-weight: 600;
+  font-size: clamp(0.95rem, 3.8vw, 1.25rem);
+  font-weight: 700;
   color: #ffffff;
   margin-bottom: 4px;
-  line-height: 1.2;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.75);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
   letter-spacing: 0.5px;
 }
 
 .cover-guest-note {
   font-family: 'TT Ramillas', serif;
-  font-size: clamp(0.55rem, 1.8vw, 0.68rem);
-  color: rgba(255, 255, 255, 0.95);
-  font-style: normal;
-  font-weight: 400;
+  font-size: clamp(0.6rem, 2.2vw, 0.72rem);
+  color: rgba(255, 255, 255, 0.75);
+  font-style: italic;
   line-height: 1.35;
-  max-width: 250px;
-  text-align: center;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.65);
 }
 
 .cover-open-btn {
   position: relative;
   overflow: hidden;
   font-family: 'TT Ramillas', serif;
-  font-size: clamp(0.85rem, 2.9vw, 1.05rem);
-  font-weight: 700;
+  font-size: clamp(0.7rem, 2.6vw, 0.9rem);
+  font-weight: 600;
   color: #0b1736;
-  background: linear-gradient(180deg, #e4b65e 0%, #cf9638 50%, #bc7f23 100%);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 8px 22px;
-  width: 100%;
-  max-width: 210px;
-  border-radius: 4px;
+  background: #dfa64f;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 7px 20px;
+  border-radius: 6px;
   cursor: pointer;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
   transition: all 0.3s ease;
   -webkit-tap-highlight-color: transparent;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 .cover-open-btn::before {
@@ -697,15 +673,14 @@ body {
   left: 0;
   width: 60%;
   height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.6), transparent);
   transform: translateX(-150%) skewX(-20deg);
   pointer-events: none;
 }
 
 .cover-open-btn:hover {
-  background: linear-gradient(180deg, #ecbe66 0%, #d89f40 50%, #c6882a 100%);
+  background: #e8b361;
   transform: translateY(-1px);
-  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.6);
 }
 
 .cover-open-btn:hover::before,
@@ -718,64 +693,6 @@ body {
 @keyframes cover-btn-shine {
   to {
     transform: translateX(250%) skewX(-20deg);
-  }
-}
-
-@media (max-height: 750px) {
-  .cover-content {
-    padding-bottom: 22px;
-  }
-  .cover-guest-box {
-    margin-bottom: 6px;
-    max-width: 260px;
-  }
-  .cover-guest-to {
-    font-size: 0.65rem;
-    margin-bottom: 2px;
-  }
-  .cover-guest-name {
-    font-size: 1.15rem;
-    margin-bottom: 2px;
-    line-height: 1.15;
-  }
-  .cover-guest-note {
-    font-size: 0.52rem;
-    line-height: 1.25;
-    max-width: 230px;
-  }
-  .cover-open-btn {
-    padding: 7px 18px;
-    font-size: 0.82rem;
-    max-width: 185px;
-  }
-}
-
-@media (max-height: 660px) {
-  .cover-content {
-    padding-bottom: 16px;
-  }
-  .cover-guest-box {
-    margin-bottom: 4px;
-    max-width: 230px;
-  }
-  .cover-guest-to {
-    font-size: 0.6rem;
-    margin-bottom: 1px;
-  }
-  .cover-guest-name {
-    font-size: 1.05rem;
-    margin-bottom: 2px;
-    line-height: 1.1;
-  }
-  .cover-guest-note {
-    font-size: 0.48rem;
-    line-height: 1.2;
-    max-width: 210px;
-  }
-  .cover-open-btn {
-    padding: 6px 16px;
-    font-size: 0.78rem;
-    max-width: 165px;
   }
 }
 
@@ -979,17 +896,17 @@ body {
 /* ===== RESPONSIVE: Small phones (<=380px) ===== */
 @media (max-width: 380px) {
   .cover-content {
-    padding: 10px 12px 28px;
+    padding: 15px 12px 45px;
   }
 
   .cover-guest-box {
-    margin-bottom: 8px;
-    max-width: 250px;
+    padding: 6px 10px;
+    margin-bottom: 6px;
+    max-width: 240px;
   }
 
   .cover-open-btn {
-    padding: 7px 18px;
-    max-width: 190px;
+    padding: 8px 20px;
   }
 
   .countdown-item {
@@ -1001,7 +918,7 @@ body {
 /* ===== RESPONSIVE: Desktop (wide viewport, centered 480px frame) ===== */
 @media (min-width: 481px) {
   .cover-content {
-    padding: 18px 14px calc(42px + env(safe-area-inset-bottom));
+    padding: 18px 14px calc(96px + env(safe-area-inset-bottom));
   }
 
   .countdown-timer {
