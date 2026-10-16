@@ -236,7 +236,7 @@ function App() {
 
   return (
     <div className="app">
-      <h1 className="sr-only">Undangan Khitan Kenzie dan Rasulan Puja</h1>
+      <h1 className="sr-only">Undangan Khitan Aslam dan Rasulan Puja</h1>
       <AudioToggle audioRef={audioRef} playing={playing} onToggle={toggleAudio} />
       <AnimatePresence mode="wait">
         {page === 'cover' && (
