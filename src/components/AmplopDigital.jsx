@@ -10,7 +10,7 @@ export default function AmplopDigital() {
 
     const updatePosition = () => {
       const vh = window.visualViewport?.height || window.innerHeight
-      el.style.bottom = `${vh * 0.22}px`
+      el.style.bottom = `${vh * 0.17}px`
     }
 
     updatePosition()
@@ -31,7 +31,7 @@ export default function AmplopDigital() {
   }, [])
 
   const handleCopy = () => {
-    navigator.clipboard.writeText('8040179314').then(() => {
+    navigator.clipboard.writeText('3030721623').then(() => {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     })
@@ -49,9 +49,9 @@ export default function AmplopDigital() {
           <img src="/konten4/BCA.webp" alt="BCA" className="amplop-bca-img" />
         </div>
         <div className="amplop-account-box">
-          <span className="amplop-account-number">8040179314</span>
+          <span className="amplop-account-number">3030721623</span>
         </div>
-        <p className="amplop-name">ZAINAL ABIDIN</p>
+        <p className="amplop-name">TRESIA MORIS</p>
         <button className="amplop-copy-btn" onClick={handleCopy}>
           {copied ? 'Tersalin!' : 'Salin Nomor Rekening'}
         </button>
@@ -60,12 +60,6 @@ export default function AmplopDigital() {
         <a href="https://maps.app.goo.gl/N7Ct31qXmGHeKG4p6" target="_blank" rel="noopener noreferrer">
           <img src="/konten4/button-lokasi.webp" alt="Lokasi Google Maps" className="amplop-maps-btn" />
         </a>
-        <p className="amplop-maps-address">
-          Jl. Muara Angke PHPT Pengasinan<br />
-          Blok K no.2 Rt.009 Rw.011<br />
-          Kel. Pluit Kec. Penjaringan<br />
-          Jakarta Utara 14450
-        </p>
       </div>
     </div>
   )

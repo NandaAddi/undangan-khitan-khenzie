@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { supabase } from '../lib/supabase'
+import { supabase, GUESTBOOK_TABLE } from '../lib/supabase'
 
 const DASH_PASSWORD = import.meta.env.VITE_DASHBOARD_PASSWORD || 'masuk123'
 
@@ -70,7 +70,7 @@ export default function Dashboard() {
   }
 
   const deleteWish = async (id) => {
-    const { error } = await supabase.from('khitan').delete().eq('id', id)
+    const { error } = await supabase.from(GUESTBOOK_TABLE).delete().eq('id', id)
     if (!error) {
       setLive((prev) => prev.filter((w) => w.id !== id))
       setLiveTotal((t) => Math.max(0, t - 1))
@@ -85,11 +85,11 @@ export default function Dashboard() {
 
     const loadInitial = async () => {
       const { count } = await supabase
-        .from('khitan')
+        .from(GUESTBOOK_TABLE)
         .select('*', { count: 'exact', head: true })
       setLiveTotal(count || 0)
       const { data, error } = await supabase
-        .from('khitan')
+        .from(GUESTBOOK_TABLE)
         .select('*')
         .order('created_at', { ascending: false })
         .limit(20)
@@ -100,10 +100,10 @@ export default function Dashboard() {
 
     try {
       channel = supabase
-        .channel('khitan-live')
+        .channel(`${GUESTBOOK_TABLE}-live`)
         .on(
           'postgres_changes',
-          { event: 'INSERT', schema: 'public', table: 'khitan' },
+          { event: 'INSERT', schema: 'public', table: GUESTBOOK_TABLE },
           (payload) => {
             setLive((prev) => [payload.new, ...prev].slice(0, 20))
             setLiveTotal((t) => t + 1)
@@ -111,7 +111,7 @@ export default function Dashboard() {
         )
         .on(
           'postgres_changes',
-          { event: 'DELETE', schema: 'public', table: 'khitan' },
+          { event: 'DELETE', schema: 'public', table: GUESTBOOK_TABLE },
           (payload) => {
             setLive((prev) => prev.filter((w) => w.id !== payload.old.id))
             setLiveTotal((t) => Math.max(0, t - 1))

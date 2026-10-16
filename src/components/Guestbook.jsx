@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { supabase } from '../lib/supabase'
+import { supabase, GUESTBOOK_TABLE } from '../lib/supabase'
 
 const PAGE_SIZE = 5
 
@@ -19,7 +19,7 @@ export default function Guestbook() {
     const from = (targetPage - 1) * PAGE_SIZE
     const to = from + PAGE_SIZE - 1
     const { data, error } = await supabase
-      .from('khitan')
+      .from(GUESTBOOK_TABLE)
       .select('*', { count: 'exact' })
       .order('created_at', { ascending: false })
       .range(from, to)
@@ -37,11 +37,11 @@ export default function Guestbook() {
   useEffect(() => {
     const init = async () => {
       const { count } = await supabase
-        .from('khitan')
+        .from(GUESTBOOK_TABLE)
         .select('*', { count: 'exact', head: true })
       setTotal(count || 0)
       const { data, error } = await supabase
-        .from('khitan')
+        .from(GUESTBOOK_TABLE)
         .select('*')
         .order('created_at', { ascending: false })
         .range(0, PAGE_SIZE - 1)

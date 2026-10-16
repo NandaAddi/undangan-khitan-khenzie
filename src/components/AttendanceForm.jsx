@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { supabase } from '../lib/supabase'
+import { supabase, GUESTBOOK_TABLE } from '../lib/supabase'
 
 const WA_NUMBER = '6283807000708'
 
@@ -21,7 +21,7 @@ export default function AttendanceForm() {
 
     setErrorMsg('')
     setSubmitting(true)
-    const { error } = await supabase.from('khitan').insert([
+    const { error } = await supabase.from(GUESTBOOK_TABLE).insert([
       {
         nama: namaTrim,
         kehadiran,
